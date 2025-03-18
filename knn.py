@@ -1,11 +1,8 @@
-from matplotlib import cm, pyplot as plt
 from pandas import read_csv
-import pandas as pd
+from sklearn import neighbors
 from sklearn.calibration import LabelEncoder
-from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
-import seaborn as sns
-from sklearn.naive_bayes import GaussianNB
+from sklearn.preprocessing import MinMaxScaler
 columns = [
     'class', 'cap-shape', 'cap-surface', 'cap-color', 'bruises', 'odor', 
     'gill-attachment', 'gill-spacing', 'gill-size', 'gill-color', 'stalk-shape', 
@@ -22,12 +19,17 @@ for col in df.columns:
 
 X = df.drop('class', axis=1)
 y = df['class'];
+scaler = MinMaxScaler()
+X_scaled = scaler.fit_transform(X)
+
 Accuracies = [];
 for i in range(0,10):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=1.0/3, random_state=40+i)
-    model_Bayes = GaussianNB();
-    model_Bayes.fit(X_train, y_train)
-    y_pred = model_Bayes.predict(X_test)
+    model_KNN = neighbors.KNeighborsClassifier(n_neighbors=15, p=1)
+    model_KNN.fit(X_train, y_train)
+
+    y_pred = model_KNN.predict(X_test)
+
     from sklearn.metrics import accuracy_score
     accuracy = accuracy_score(y_test, y_pred);
     Accuracies.append(accuracy);
@@ -35,15 +37,8 @@ for i in range(0,10):
 
 mean_accuracy = sum(Accuracies) / len(Accuracies);
 print("Average accuracy of KNN: %.2f %%" %(100 * mean_accuracy))
-# cm = confusion_matrix(y_test, y_pred)
 
-# # Chuyển ma trận phân lớp thành DataFrame để hiển thị rõ ràng
-# cm_df = pd.DataFrame(cm, index=['Edible', 'Poisonous'],columns=['Edible', 'Poisonous'])
 
-# # Bước 5: Vẽ ma trận phân lớp
-# plt.figure(figsize=(6, 5))
-# sns.heatmap(cm_df, annot=True, fmt='d', cmap='Blues', cbar=False)
-# plt.title('Confusion Matrix')
-# plt.xlabel('Predicted Values')
-# plt.ylabel('Actual Values')
-# plt.show()
+
+
+
