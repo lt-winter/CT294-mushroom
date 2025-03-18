@@ -1,5 +1,5 @@
 import pandas as pd
 
-dt = pd.read_csv("agaricus-lepiota.data")
+raw_df = pd.read_csv("agaricus-lepiota.data")
 
-print(dt.head())
+print(raw_df)
