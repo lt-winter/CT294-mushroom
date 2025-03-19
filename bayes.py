@@ -1,10 +1,7 @@
-from matplotlib import cm, pyplot as plt
 from pandas import read_csv
-import pandas as pd
 from sklearn.calibration import LabelEncoder
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
-import seaborn as sns
 from sklearn.naive_bayes import GaussianNB
 from sklearn.preprocessing import MinMaxScaler
 columns = [
@@ -31,6 +28,7 @@ for i in range(0,10):
     model_Bayes = GaussianNB();
     model_Bayes.fit(X_train, y_train)
     y_pred = model_Bayes.predict(X_test)
+
     from sklearn.metrics import accuracy_score
     accuracy = accuracy_score(y_test, y_pred);
     Accuracies.append(accuracy);
@@ -40,15 +38,3 @@ mean_accuracy = sum(Accuracies) / len(Accuracies);
 print("Average accuracy of KNN: %.2f %%" %(100 * mean_accuracy))
 
 print("Average accuracy of Bayes: %.2f %%" %(100 * mean_accuracy))
-# cm = confusion_matrix(y_test, y_pred)
-
-# # Chuyển ma trận phân lớp thành DataFrame để hiển thị rõ ràng
-# cm_df = pd.DataFrame(cm, index=['Edible', 'Poisonous'],columns=['Edible', 'Poisonous'])
-
-# # Bước 5: Vẽ ma trận phân lớp
-# plt.figure(figsize=(6, 5))
-# sns.heatmap(cm_df, annot=True, fmt='d', cmap='Blues', cbar=False)
-# plt.title('Confusion Matrix')
-# plt.xlabel('Predicted Values')
-# plt.ylabel('Actual Values')
-# plt.show()
