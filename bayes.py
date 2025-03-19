@@ -34,7 +34,21 @@ for i in range(0,10):
     from sklearn.metrics import accuracy_score
     accuracy = accuracy_score(y_test, y_pred);
     Accuracies.append(accuracy);
-    print("Accurancy of KNN: %.2f %%" %(100 * accuracy))
+    print("Accurancy of Bayes: %.2f %%" %(100 * accuracy))
 
 mean_accuracy = sum(Accuracies) / len(Accuracies);
 print("Average accuracy of KNN: %.2f %%" %(100 * mean_accuracy))
+
+print("Average accuracy of Bayes: %.2f %%" %(100 * mean_accuracy))
+# cm = confusion_matrix(y_test, y_pred)
+
+# # Chuyển ma trận phân lớp thành DataFrame để hiển thị rõ ràng
+# cm_df = pd.DataFrame(cm, index=['Edible', 'Poisonous'],columns=['Edible', 'Poisonous'])
+
+# # Bước 5: Vẽ ma trận phân lớp
+# plt.figure(figsize=(6, 5))
+# sns.heatmap(cm_df, annot=True, fmt='d', cmap='Blues', cbar=False)
+# plt.title('Confusion Matrix')
+# plt.xlabel('Predicted Values')
+# plt.ylabel('Actual Values')
+# plt.show()

@@ -50,7 +50,7 @@ def accurate():
     return accuracies
 
 accuracies = accurate()
-print("Độ chính xác trung bình ", sum(accuracies) / len(accuracies))
+print("Độ chính xác trung bình ", sum(accuracies) / len(accuracies) * 100, "%")
 
 
 
