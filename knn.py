@@ -24,8 +24,8 @@ X_scaled = scaler.fit_transform(X)
 
 Accuracies = [];
 for i in range(0,10):
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=1.0/3, random_state=40+i)
-    model_KNN = neighbors.KNeighborsClassifier(n_neighbors=15, p=1)
+    X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=40+i)
+    model_KNN = neighbors.KNeighborsClassifier(n_neighbors=15, p=2)
     model_KNN.fit(X_train, y_train)
 
     y_pred = model_KNN.predict(X_test)
