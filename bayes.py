@@ -37,7 +37,7 @@ for i in range(0,10):
     model_Bayes = GaussianNB();
     model_Bayes.fit(X_train, y_train)
     y_pred = model_Bayes.predict(X_test)
-    if(i==2):
+    if(i==0):
         print("Print results for 20 test data points")
         print("Predicted labels :", ', '.join(map(str, y_pred[0:20])))
         print("Ground truth     :", ', '.join(map(str, y_test[0:20])))

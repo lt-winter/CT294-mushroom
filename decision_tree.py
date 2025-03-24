@@ -29,8 +29,6 @@ def accurate():
     accuracies = []
     for i in range(0, 10):
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-        print(X_train)
-        # print(y_train)
         tree_clf = DecisionTreeClassifier(criterion="entropy", random_state=40 + i, max_depth=5)
         tree_clf.fit(X_train, y_train)
 

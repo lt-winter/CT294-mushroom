@@ -27,7 +27,7 @@ print("\tData after encode")
 print(df.head())
 X = df.drop('class', axis=1)
 y = df['class'];
-for i in range(2):
+for i in range(0):
     print(f"sample data of class {i}:")
     print(X[y==i].head())
     print()
