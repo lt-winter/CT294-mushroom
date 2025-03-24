@@ -14,15 +14,16 @@ columns = [
     'ring-number', 'ring-type', 'spore-print-color', 'population', 'habitat'
 ]
 df = read_csv('agaricus-lepiota.data', names=columns);
+print("\tData before encode")
 print(df.head())
 df.replace("?", df.mode().iloc[0], inplace=True)
 
-# Tiền xử lý: Chuyển đổi các giá trị phân loại thành giá trị số
 label_encoder = LabelEncoder();
 
 for col in df.columns:
     df[col] = label_encoder.fit_transform(df[col])
 
+print("\tData after encode")
 print(df.head())
 X = df.drop('class', axis=1)
 y = df['class'];
