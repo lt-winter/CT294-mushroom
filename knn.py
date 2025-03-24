@@ -14,7 +14,7 @@ columns = [
     'ring-number', 'ring-type', 'spore-print-color', 'population', 'habitat'
 ]
 df = read_csv('agaricus-lepiota.data', names=columns);
-
+print(df.head())
 df.replace("?", df.mode().iloc[0], inplace=True)
 
 # Tiền xử lý: Chuyển đổi các giá trị phân loại thành giá trị số
@@ -23,6 +23,7 @@ label_encoder = LabelEncoder();
 for col in df.columns:
     df[col] = label_encoder.fit_transform(df[col])
 
+print(df.head())
 X = df.drop('class', axis=1)
 y = df['class'];
 for i in range(2):
@@ -51,17 +52,11 @@ mean_accuracy = sum(Accuracies) / len(Accuracies);
 print("Average accuracy of KNN: %.2f %%" %(100 * mean_accuracy))
 cm = confusion_matrix(y_test, y_pred, labels=[0, 1])
 
-# Convert confusion matrix to a DataFrame for better visualization
-cm_df = pd.DataFrame(cm, index=['Poisonous', 'Edible'], columns=['Poisonous', 'Edible'])
+cm_df = pd.DataFrame(cm, index=['Edible', 'Poisonous'], columns=['Edible', 'Poisonous'])
 
-# Display confusion matrix
 plt.figure(figsize=(5, 4))
 sns.heatmap(cm_df, annot=True, fmt="d", cmap="Blues")
 plt.title('Confusion Matrix')
 plt.ylabel('Actual Values')
 plt.xlabel('Predicted Values')
 plt.show()
-
- 
-
-

@@ -20,11 +20,9 @@ for col in df.columns:
 
 X = df.drop('class', axis=1)
 y = df['class'];
-scaler = MinMaxScaler()
-X_scaled = scaler.fit_transform(X)
 Accuracies = [];
 for i in range(0,10):
-    X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=40+i)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=40+i)
     model_Bayes = GaussianNB();
     model_Bayes.fit(X_train, y_train)
     y_pred = model_Bayes.predict(X_test)
