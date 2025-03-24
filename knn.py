@@ -11,6 +11,8 @@ columns = [
     'ring-number', 'ring-type', 'spore-print-color', 'population', 'habitat'
 ]
 df = read_csv('agaricus-lepiota.data', names=columns);
+df.replace("?", df.mode().iloc[0], inplace=True)
+
 # Tiền xử lý: Chuyển đổi các giá trị phân loại thành giá trị số
 label_encoder = LabelEncoder();
 
@@ -19,12 +21,9 @@ for col in df.columns:
 
 X = df.drop('class', axis=1)
 y = df['class'];
-scaler = MinMaxScaler()
-X_scaled = scaler.fit_transform(X)
-
 Accuracies = [];
 for i in range(0,10):
-    X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=40+i)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=40+i)
     model_KNN = neighbors.KNeighborsClassifier(n_neighbors=15, p=2)
     model_KNN.fit(X_train, y_train)
 
@@ -39,6 +38,6 @@ mean_accuracy = sum(Accuracies) / len(Accuracies);
 print("Average accuracy of KNN: %.2f %%" %(100 * mean_accuracy))
 
 
-
+ 
 
 
